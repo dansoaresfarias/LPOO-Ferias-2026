@@ -82,7 +82,8 @@ public class Cliente {
 	public String toString() {
 		return this.nome + ", de CPF " + this.cpf + "\n"
 				+ "Data Nascimento: " + this.dataNasc.getDate() + "/" + 
-				this.dataNasc.getMonth() + "/" + this.dataNasc.getYear() +
+				(this.dataNasc.getMonth() + 1) + "/" + 
+				(this.dataNasc.getYear() + 1900) +
 				(this.rg == 0 ? "" : ", RG: " + this.rg) + "\n"
 				+ "Email: " + this.email + 
 				(this.telefone == null ? "" : ", Telefone: " + this.telefone) + "\n"

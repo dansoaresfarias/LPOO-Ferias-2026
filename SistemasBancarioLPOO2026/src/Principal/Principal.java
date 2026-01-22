@@ -32,6 +32,10 @@ public class Principal {
 		
 		System.out.println(luciana);
 		
+		Cliente valdir = new Cliente("José Valdir Duarte", "897.999.777-00",
+				new Date(101, 8, 19), "jose.v.duarte@gmail.com");
+		
+		System.out.println(valdir);
 		
 	}
 
