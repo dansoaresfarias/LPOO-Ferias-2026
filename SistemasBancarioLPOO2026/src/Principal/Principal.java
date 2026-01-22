@@ -1,6 +1,9 @@
 package Principal;
 
+import java.util.Date;
+
 import Model.Agencia;
+import Model.Cliente;
 import Model.Endereco;
 
 public class Principal {
@@ -22,7 +25,13 @@ public class Principal {
 				"Jaboatão dos Guararapes", "Piedade", 
 				"Rua Esquerda", 101, null, "50070-090");
 		endLuciana.setCidade("Recife");
-		System.out.println(endLuciana);
+		
+		Cliente luciana = new Cliente("Luciana Borges", "321.456.987-00", 
+				new Date(90, 4, 12), 345678, "lucianaOdeiaJames@gmail.com",
+				"8199887766", endLuciana);
+		
+		System.out.println(luciana);
+		
 		
 	}
 
