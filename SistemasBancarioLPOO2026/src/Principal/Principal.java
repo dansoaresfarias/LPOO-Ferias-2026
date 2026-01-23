@@ -1,42 +1,51 @@
 package Principal;
 
 import java.util.Date;
+import java.util.Iterator;
 
 import Model.Agencia;
 import Model.Cliente;
+import Model.Conta;
 import Model.Endereco;
 
 public class Principal {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		//System.out.println("Olá mundo!");
-		
-		Endereco endAgBancoSENAC = new Endereco("PE", "Recife",
-				"Santo Amaro", "Rua do Pombal", 71, null, "50070-050");
-		Agencia agSantoAmaro = new Agencia("Agência de Santo Amaro", 
-				321, "+558121234567", "agsantoamaro@bancosenac.br", 
+		// System.out.println("Olá mundo!");
+
+		Endereco endAgBancoSENAC = new Endereco("PE", "Recife", "Santo Amaro", "Rua do Pombal", 71, null, "50070-050");
+		Agencia agSantoAmaro = new Agencia("Agência de Santo Amaro", 321, "+558121234567", "agsantoamaro@bancosenac.br",
 				endAgBancoSENAC);
-		
+
 		System.out.println(agSantoAmaro);
-		
-		
-		Endereco endLuciana = new Endereco("PE", 
-				"Jaboatão dos Guararapes", "Piedade", 
-				"Rua Esquerda", 101, null, "50070-090");
+
+		Endereco endLuciana = new Endereco("PE", "Jaboatão dos Guararapes", "Piedade", "Rua Esquerda", 101, null,
+				"50070-090");
 		endLuciana.setCidade("Recife");
-		
-		Cliente luciana = new Cliente("Luciana Borges", "321.456.987-00", 
-				new Date(90, 4, 12), 345678, "lucianaOdeiaJames@gmail.com",
-				"8199887766", endLuciana);
-		
+
+		Cliente luciana = new Cliente("Luciana Borges", "321.456.987-00", new Date(90, 4, 12), 345678,
+				"lucianaOdeiaJames@gmail.com", "8199887766", endLuciana);
+
 		System.out.println(luciana);
+
+		Conta contaLu = new Conta(luciana, 1234, agSantoAmaro, new Date(112, 05, 12), 15348.90);
+
+		contaLu.depositar(-800);
+
+		contaLu.depositar(800);
+
+		contaLu.sacar(-200);
 		
-		Cliente valdir = new Cliente("José Valdir Duarte", "897.999.777-00",
-				new Date(101, 8, 19), "jose.v.duarte@gmail.com");
-		
+		contaLu.sacar(20000);
+
+		contaLu.sacar(200);
+
+		Cliente valdir = new Cliente("José Valdir Duarte", "897.999.777-00", new Date(101, 8, 19),
+				"jose.v.duarte@gmail.com");
+
 		System.out.println(valdir);
-		
+
 	}
 
 }

@@ -7,6 +7,7 @@ public class Agencia {
 	private String telefone;
 	private String email;
 	private Endereco end;
+	static int numContas = 0;
 
 	public Agencia(String nome, int numero, String telefone, String email, Endereco end) {
 		this.nome = nome;

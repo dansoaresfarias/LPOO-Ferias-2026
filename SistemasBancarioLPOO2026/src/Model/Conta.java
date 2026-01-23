@@ -23,6 +23,7 @@ public class Conta {
 		this.saldo = 0.0;
 		this.status = true;
 		this.transacoes = new ArrayList<Transacao>();
+		Agencia.numContas += 1;
 	}
 
 	// Situação de conta já existente
@@ -57,14 +58,35 @@ public class Conta {
 	}
 
 	// Sacar
+	public boolean sacar(double valor) {
+		if (valor > 0) {
+			if (this.saldo >= valor) {
+				this.saldo -= valor;
+				this.transacoes.add(new Transacao(TipoTransacao.SAQUE, new Date(), valor, 
+						null, '-'));
+				return true;
+			} else {
+				//Erro!
+				System.out.println("Saldo insuficiente para o valor R$ " + valor);
+				return false;
+			}
+		} else {
+			//Erro!
+			System.out.println("O valor R$ " + valor +", informado é inválido.");
+			return false;
+		}		
+	}
 
 	// Transferir
 
 	// RealizarPIX
 
 	// InformarSaldo
+	public double informarSaldo() {
+		return this.saldo;
+	}
 
-	// ImprimirEtrato
+	// ImprimirExtrato
 
 	public int getNumero() {
 		return numero;
@@ -96,10 +118,6 @@ public class Conta {
 
 	public Date getDataAbertura() {
 		return dataAbertura;
-	}
-
-	public double getSaldo() {
-		return saldo;
 	}
 
 	public ArrayList<Transacao> getTransacoes() {
