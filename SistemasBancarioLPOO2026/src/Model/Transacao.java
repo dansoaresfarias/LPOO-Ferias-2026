@@ -11,6 +11,7 @@ public class Transacao {
 	private String chavePix;
 	private char tipoValor;
 
+	//overload - sobrecarga de construtor - trasnferência
 	public Transacao(TipoTransacao tipo, Date data, double valor, Cliente clienteTransferencia, char tipoValor) {
 		super();
 		this.tipo = tipo;
@@ -19,7 +20,7 @@ public class Transacao {
 		this.clienteTransferencia = clienteTransferencia;
 		this.tipoValor = tipoValor;
 	}
-	
+	//overload - sobrecarga de construtor - pix
 	public Transacao(TipoTransacao tipo, Date data, double valor, String chavePix, char tipoValor) {
 		super();
 		this.tipo = tipo;
@@ -28,7 +29,7 @@ public class Transacao {
 		this.chavePix = chavePix;
 		this.tipoValor = tipoValor;
 	}
-	
+	//overload - sobrecarga de construtor - saque e depósito
 	public Transacao(TipoTransacao tipo, Date data, double valor, char tipoValor) {
 		super();
 		this.tipo = tipo;
@@ -79,7 +80,7 @@ public class Transacao {
 		} else {
 			transacao += "\t ";
 		} 
-		transacao += this.tipoValor + "R$ " + this.valor;
+		transacao += this.tipoValor + "R$ " + String.format("%.2f", this.valor);
 		return transacao;
 	}
 

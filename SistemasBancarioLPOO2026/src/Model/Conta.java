@@ -3,7 +3,7 @@ package Model;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Conta {
+public abstract class Conta {
 
 	private Cliente cliente;
 	private int numero;
@@ -124,8 +124,18 @@ public class Conta {
 		return this.saldo;
 	}
 
-	// ImprimirExtrato
-	
+	// GerarExtrato
+	public String gerarExtrato() {
+		String extrato = ".:: Extrato da Conta do Banco SENAC ::.\n" + this.toString() + "\n";
+		if(this.transacoes.size() > 0) {
+			extrato += "Data \t\t\t Histórico \t Valor";
+		}
+		for (Transacao transacao : transacoes) {
+			extrato += "\n" + transacao;
+		}
+		extrato += "\nSaldo: R$" + String.format("%.2f", this.saldo);
+		return extrato;
+	}
 
 	public int getNumero() {
 		return numero;
@@ -164,6 +174,9 @@ public class Conta {
 	}
 
 	// ToString da conta
-	
+	public String toString() {
+		return "Agência: " + this.ag.getNome() + " | " + "Conta: " + this.numero
+				+ " | " + "Proprietário(a): " + this.cliente.getNome();
+	}
 
 }
