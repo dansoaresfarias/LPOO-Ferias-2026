@@ -45,16 +45,15 @@ public class Conta {
 
 	// Depositar
 	public boolean depositar(double valor) {
-		if(valor > 0) {
+		if (valor > 0) {
 			this.saldo += valor; // this.saldo = this.saldo + valor;
-			this.transacoes.add(new Transacao(TipoTransacao.DEPÓSITO, new Date(), valor, 
-					null, '+'));
+			this.transacoes.add(new Transacao(TipoTransacao.DEPÓSITO, new Date(), valor, '+'));
 			return true;
 		} else {
-			//Erro!
-			System.out.println("O valor R$ " + valor +", informado é inválido.");
+			// Erro!
+			System.out.println("O valor R$ " + valor + ", informado é inválido.");
 			return false;
-		}		
+		}
 	}
 
 	// Sacar
@@ -62,24 +61,63 @@ public class Conta {
 		if (valor > 0) {
 			if (this.saldo >= valor) {
 				this.saldo -= valor;
-				this.transacoes.add(new Transacao(TipoTransacao.SAQUE, new Date(), valor, 
-						null, '-'));
+				this.transacoes.add(new Transacao(TipoTransacao.SAQUE, new Date(), valor, '-'));
 				return true;
 			} else {
-				//Erro!
+				// Erro!
 				System.out.println("Saldo insuficiente para o valor R$ " + valor);
 				return false;
 			}
 		} else {
-			//Erro!
-			System.out.println("O valor R$ " + valor +", informado é inválido.");
+			// Erro!
+			System.out.println("O valor R$ " + valor + ", informado é inválido.");
 			return false;
-		}		
+		}
 	}
 
 	// Transferir
+	public boolean transferir(double valor, Conta contaFavorecida) {
+		if (valor > 0 && contaFavorecida != null) {
+			if (this.saldo >= valor) {
+				this.saldo -= valor;
+				this.transacoes.add(
+						new Transacao(TipoTransacao.TRANSFERÊNCIA, new Date(), valor, contaFavorecida.cliente, '-'));
+				contaFavorecida.saldo += valor;
+				contaFavorecida.transacoes
+						.add(new Transacao(TipoTransacao.TRANSFERÊNCIA, new Date(), valor, this.cliente, '+'));
+				return true;
+			} else {
+				// Erro!
+				System.out.println("Saldo insuficiente para o valor R$ " + valor);
+				return false;
+			}
+		} else {
+			// Erro!
+			System.out.println("Erro nos valores das informações de valor e conta repassados. Repetir a operação!");
+			return false;
+		}
+	}
 
 	// RealizarPIX
+	public boolean realizarPix(double valor, String chavePix) {
+		if (valor > 0 && chavePix != null) {
+			if (this.saldo >= valor) {
+				this.saldo -= valor;
+				this.transacoes.add(new Transacao(TipoTransacao.PIX, new Date(), valor, 
+						chavePix, '-'));
+				// depois... manda para a conta referente ao pix!
+				return true;
+			} else {
+				// Erro!
+				System.out.println("Saldo insuficiente para o valor R$ " + valor);
+				return false;
+			}
+		} else {
+			// Erro!
+			System.out.println("Erro nos valores das informações de valor e chave Pix repassados. Repetir a operação!");
+			return false;
+		}
+	}
 
 	// InformarSaldo
 	public double informarSaldo() {
@@ -87,6 +125,7 @@ public class Conta {
 	}
 
 	// ImprimirExtrato
+	
 
 	public int getNumero() {
 		return numero;
@@ -123,5 +162,8 @@ public class Conta {
 	public ArrayList<Transacao> getTransacoes() {
 		return transacoes;
 	}
+
+	// ToString da conta
+	
 
 }
